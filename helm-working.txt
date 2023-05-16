@@ -31,3 +31,4 @@ history
 helm list
 helm uninstall web-eric
 
+bitnami.com/stacks/helm
