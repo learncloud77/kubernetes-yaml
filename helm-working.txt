@@ -1,0 +1,33 @@
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+ ./get_helm.sh
+
+helm list
+helm repo list
+helm repo add myrepo https://charts.bitnami.com/bitnami
+helm repo list
+helm install web-eric myrepo/
+kubectl get pods
+kubectl get deployment
+kubectl get svc
+history 
+helm install apache myrepo/apache
+kubectl get pods
+kubectl get svc
+kubectl get pods
+kubectl get pods -o wide
+kubectl get svc
+kubectl get pods -o wide
+kubectl get svc
+history 
+helm template vault myrepo/nginx --output-dir vault/manifests
+cd vault/manifests/nginx/templates/
+ls
+vim deployment.yaml 
+vim svc.yaml 
+kubectl get svc
+cd
+history 
+helm list
+helm uninstall web-eric
+
