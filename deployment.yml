@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: depapp
+  labels:
+    type: dev
+spec:
+  template:
+    metadata:
+      labels:
+        org: hp
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.14.1
+  replicas: 8
+  selector:
+    matchLabels:
+      org: hp 
+  strategy:
+#    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 0%

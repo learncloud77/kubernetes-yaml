@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: newapp
+spec:
+  containers:
+  - name: vm1
+    image: redis
+    volumeMounts:
+    - mountPath: /suse
+      name: vol
+
+  - name: vm2
+    image: nginx
+    volumeMounts:
+    - mountPath: /suse
+      name: vol
+
+  volumes:
+  - name: vol
+    emptyDir: {}

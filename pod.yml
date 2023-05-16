@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp1
+  namespace: eric
+  labels:
+    app: myapp
+spec:
+  containers:
+   - name: app
+     image: redis
+

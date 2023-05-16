@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 2Gi
+  accessModes: 
+  - ReadWriteMany
+  hostPath:
+    path: /red
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-vol
+spec:
+  storageClassName: manual
+  selector:
+    matchLabels: 
+      type: local
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+      
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: volapp
+spec:
+  containers:
+  - name: app
+    image: nginx
+    volumeMounts:
+    - mountPath: /linux
+      name: vol1
+
+  volumes:
+  - name: vol1
+    persistentVolumeClaim:
+      claimName: pvc-vol 

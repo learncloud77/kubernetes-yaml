@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec: 
+  template:
+    metadata:
+      labels:
+        app: myapp
+        type: front-end
+        tier: web
+    spec:
+      containers:
+      - name: app
+        image: redis
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+
+

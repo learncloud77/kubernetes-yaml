@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devapp
+  labels:
+    app: devapp
+    type: front-end
+
+spec:
+  containers:
+  - name: redis-cont
+    image: redis
+    

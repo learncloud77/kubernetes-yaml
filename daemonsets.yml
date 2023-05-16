@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: my-dset
+  labels:
+    type: dsapp
+spec:
+  template:
+    metadata:
+      labels:
+        org: dsapp
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.14.1
+  selector:
+    matchLabels:
+      org: dsapp

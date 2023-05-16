@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web5
+  namespace: eric
+spec:
+  containers:
+  - name: app
+    image: redis
+    resources: 
+      requests:
+        memory: 300Mi
+        cpu: 50m
+      limits:
+        memory: 400Mi
+        cpu: 80m
+
