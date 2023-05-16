@@ -1,0 +1,725 @@
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce -y
+systemctl start docker
+systemctl enable docker
+systemctl status docker
+systemctl status docker
+
+su - root
+docker ps
+docker images
+docker container run -dt --name ericapp redis
+docker ps
+docker images
+docker pull mongodb
+docker pull ubuntu
+docker images
+docker ps
+history 
+docker container run -dt ubuntu
+docker ps
+docker container exec -it tender_allen 
+
+bash
+ docker ps -a
+ docker container start ericapp
+ docker ps
+ docker container rm ericapp1
+
+Ericsson Docker KubernetesMay 09 10:34 AM - 
+
+2
+
+​
+
+3
+
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+4
+
+yum install docker-ce -y
+
+5
+
+systemctl start docker
+
+6
+
+systemctl enable docker
+
+7
+
+systemctl status docker
+
+8
+
+systemctl status docker
+
+9
+
+​
+
+10
+
+su - root
+
+11
+
+docker ps
+
+12
+
+docker images
+
+13
+
+docker container run -dt --name ericapp redis
+
+14
+
+docker ps
+
+15
+
+docker images
+
+16
+
+docker pull mongodb
+
+17
+
+docker pull ubuntu
+
+18
+
+docker images
+
+19
+
+docker ps
+
+20
+
+history 
+
+21
+
+docker container run -dt ubuntu
+
+22
+
+docker ps
+
+23
+
+docker container exec -it tender_allen 
+
+24
+
+​
+
+25
+
+bash
+
+26
+
+ docker ps -a
+
+27
+
+ docker container start ericapp
+
+28
+
+ docker ps
+
+29
+
+ docker container rm ericapp
+
+30
+
+ docker container stop ericapp
+
+31
+
+docker container inspect tender_allen 
+
+32
+
+docker container run --name devapp nginx
+
+33
+
+  docker container run -dt --name myapp -p 8090:80 nginx
+
+34
+
+ docker container run -dt --name webapp -P nginx
+
+35
+
+docker container ls -aq
+
+36
+
+docker container stop $(docker container ls -aq)
+
+37
+
+docker ps
+
+38
+
+docker ps -a
+
+39
+
+docker container start $(docker container ls -aq)
+
+40
+
+docker container update --restart unless-stopped webapp
+
+41
+
+docker ps
+
+42
+
+docker container start $(docker container ls -aq)
+
+JOBS
+
+ docker container stop ericapp
+docker container inspect tender_allen 
+docker container run --name devapp nginx
+  docker container run -dt --name myapp -p 8090:80 nginx
+ docker container run -dt --name webapp -P nginx
+docker container ls -aq
+docker container stop $(docker container ls -aq)
+docker ps
+docker ps -a
+docker container start $(docker container ls -aq)
+docker container update --restart unless-stopped webapp
+docker ps
+docker container start $(docker container ls -aq)
+docker ps
+systemctl restart docker
+docker ps
+docker container run -dt --name testapp --restart unless-stopped ubuntu
+docker ps
+docker container start $(docker container ls -aq)
+docker commit webapp sanpshot
+
+
+FROM centos:7                                                             |  113  docker build -t myimage:1 . --file dockerfile1
+RUN yum update -y                                                         |  114  docker images
+RUN yum install httpd httpd-tools -y                                      |  115  docker container run -dt --name newapp myimage:1
+EXPOSE 80                                                                 |  116  docker ps
+RUN echo "Welcome to New docker image" > /var/www/html/index.html         |  117  docker container exec -it newapp bash
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]                               |  118  history
+~                                                                         |  119  history | tail -20 > pop
+~                                                                         |  120  vim -O dockerfile1 pop
+~                                                                         |  121  docker container exec -it newapp bash
+~                                                                         |  122  vim dockerfile2
+~                                                                         |  123  docker build -t http . --file dockerfile2
+~                                                                         |  124  docker images
+~                                                                         |  125  docker container run -dt --name prodapp -P http
+~                                                                         |  126  docker ps
+
+docker login
+docker tag testimage:latest mahijs/testimage:v1
+docker push mahijs/testimage:v1
+history 
+docker pull mahijs/emcapp
+docker pull mahijs/emcapp:v
+docker pull mahijs/emcapp:v1
+history 
+docker search emcapp:v1
+docker search nginx
+history 
+docker container run -dt --name myregistry -p 5000:5000 registry:2
+docker ps
+docker images
+docker tag sanpshot:latest localhost:5000/ericimage
+docker push localhost:5000/ericimage
+docker container exec -it myregistry sh
+
+docker volume ls
+docker volume create myvol
+docker volume ls
+docker container run -dt --name volapp -v myvol:/ericsson nginx
+docker ps
+docker container exec -it volapp bash
+cd /var/lib/docker/volumes/myvol/_data/
+ls
+cd
+history 
+docker container exec -it volapp bash
+docker volume inspect myvol 
+mkdir /data
+docker container run -dt --name newapp -v /data:/store ubuntu
+docker container exec -it newapp bash
+
+docker network ls
+docker network inspect bridge 
+docker network inspect bridge  | less
+ifconfig | less
+docker network ls
+docker network inspect mybridge | less
+ifconfig | less
+docker container run -dt --name app1 --network mybridge ubuntu
+docker container inspect app1 
+history 
+docker network create --driver bridge --subnet=192.168.0.0/24 ericbridge
+docker network ls
+docker network inspect ericbridge 
+ifconfig | less
+docker container run -dt --name app22 --network ericbridge ubuntu
+docker container inspect app22
+history 
+docker container update
+docker container update --help
+history 
+docker container run -dt --name netapp --network ericbridge --ip 192.168.0.20 ubuntu
+
+docker container stop $(docker container ls -aq)
+docker container rm $(docker container ls -aq)
+docker image rm $(docker image ls -aq)
+--------------------------------------------------
+
+Kubernetes cluster
+
+
+sed -i '/swap/d' /etc/fstab 
+swapoff -a
+free -m
+
+
+Master Node:- node01
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=10257/tcp
+firewall-cmd --permanent --add-port=10259/tcp
+firewall-cmd --permanent --add-port=2379-2380/tcp
+firewall-cmd --reload
+
+
+WorkerNode : node02 & node03
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=30000-32767/tcp
+firewall-cmd --reload
+ 
+
+yum install yum-utils -y
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce -y
+systemctl start docker
+systemctl enable docker
+systemctl status docker
+
+
+sudo yum -y install git wget curl
+VER=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest|grep tag_name | cut -d '"' -f 4|sed 's/v//g')
+echo $VER
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v${VER}/cri-dockerd-${VER}.amd64.tgz
+tar xvf cri-dockerd-${VER}.amd64.tgz
+sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
+cri-dockerd --version
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
+sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
+sudo sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+sudo systemctl daemon-reload
+sudo systemctl enable cri-docker.service
+sudo systemctl enable --now cri-docker.socket
+systemctl status cri-docker.socket
+
+
+ cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+sudo systemctl enable docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+
+ Install kubeadm kublet kubectl on all nodes    node01,2,3
+
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=0
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+EOF
+
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+sudo systemctl enable --now kubelet
+
+
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+
+sudo sysctl --system
+
+
+kubeadm reset --cri-socket /var/run/cri-dockerd.sock 
+
+kubeadm init --pod-network-cidr 10.244.0.0/16  --apiserver-advertise-address 192.168.122.51 --cri-socket /var/run/cri-dockerd.sock 
+
+ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+
+kubeadm token create --print-join-command
+--cri-socket /var/run/cri-dockerd.sock
+
+
+apiVersion: v1                                     |  157  history
+kind: Pod                                          |  158  kubectl api-resources
+metadata:                                          |  159  kubectl api-resources  | grep pod
+  name: multipod                                   |  160  kubectl api-resources  | grep deployment
+spec:                                              |  161  kubectl api-resources  | grep role
+  containers:                                      |  162  ls
+  - name: app1                                     |  163  vim pod.yaml
+    image: nginx                                   |  164  kubectl apply -f pod.yaml
+                                                   |  165  kubectl get pods
+  - name: app2                                     |  166  vim pod.yaml
+    image: redis                                   |  167  history
+~                                                  |  168  cat pod.yaml
+~                                                  |  169  vim pod.yaml
+~                                                  |  170  vim multi.yaml
+~                                                  |  171  kubectl apply -f multi.yaml
+~                                                  |  172  kubectl get pods
+~                                                  |  173  kubectl exec -it multipod -- bash
+~                                                  |  174  kubectl exec -it multipod -c app2 -- bash
+~  ------------------------------------------------------------------------------------- 
+kubectl get pods --show-labels
+kubectl get pods --selector app=myapp
+history 
+kubectl get pods --selector myapp
+kubectl label pod multipod app=eric
+kubectl get pods --show-labels
+vim pod.yaml 
+kubectl apply -f pod.yaml 
+kubectl get pods --show-labels
+history 
+cat  pod.yaml 
+history 
+kubectl get pods --show-labels
+kubectl label pod web1 app-
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devapp
+  labels:
+    type: dev
+    org: eric
+    location: delhi
+spec:
+  containers:
+  - name: app
+    image: redis
+----------------------------------------------------------
+
+kubectl rollout history deployment depapp
+kubectl rollout history deployment depapp --revision=1
+kubectl rollout history deployment depapp --revision=2
+kubectl rollout history deployment depapp --revision=3
+kubectl describe deployment depapp 
+kubectl rollout history deployment depapp
+kubectl rollout history deployment depapp --revision=3
+kubectl rollout undo deployment depapp --to-revision=1
+kubectl rollout status deployment depapp
+kubectl describe deployment depapp 
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depapp
+  labels:
+    type: dev
+spec:
+  template:
+    metadata:
+      labels:
+        org: hp
+    spec:
+      containers:
+      - name: app
+        image: nginx
+
+  replicas: 8
+  selector:
+    matchLabels:
+      org: hp
+
+  strategy:
+    type: Recreate
+#    type: RollingUpdate
+#    rollingUpdate:
+#      maxUnavailable: 2
+#      maxSurge: 1
+
+
+kubectl get nodes
+  332  kubectl get nodes --show-labels
+  333  kubectl label node node03 type=ssd
+  334  kubectl get nodes --show-labels
+  335  vim pod.yaml 
+  336  kubectl apply -f pods
+  337  kubectl apply -f pod.yaml 
+  338  kubectl get pod -o wide
+  339  history 
+[root@node01 ~]# cat pod.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp1
+spec:
+  containers:
+  - name: app
+    image: redis
+  nodeSelector:
+    type: ssd
+
+apiVersion: v1                          |apiVersion: apps/v1                     |  326  kubectl apply -f daemon.yaml
+kind: Pod                               |kind: DaemonSet                         |  327  kubectl get ds
+metadata:                               |metadata:                               |  328  kubectl get pods -o wide
+  name: myapp1                          |  name: newdset                         |  329  history | tail -20 > pop
+spec:                                   |  labels:                               |  330  vim -O daemon.yaml pop
+  containers:                           |    type: ds                            |  331  kubectl get nodes
+  - name: app                           |spec:                                   |  332  kubectl get nodes --show-labels
+    image: redis                        |  template:                             |  333  kubectl label node node03 type=ssd
+  nodeSelector:                         |    metadata:                           |  334  kubectl get nodes --show-labels
+    type: ssd                           |      labels:                           |  335  vim pod.yaml
+~                                       |        org: ds                         |  336  kubectl apply -f pods
+~                                       |    spec:                               |  337  kubectl apply -f pod.yaml
+~                                       |      nodeSelector:                     |  338  kubectl get pod -o wide
+~                                       |        type: ssd                       |  339  history
+~                                       |      containers:                       |  340  cat pod.yaml
+~                                       |      - name: app                       |  341  vim daemon.yaml
+~                                       |        image: nginx:1.9.1              |  342  kubectl apply -f daemon.yaml
+~                                       |                                        |  343  kubectl get pods -o wide
+~                                       |  selector:                             |  344  vim -O pod.yaml daemon.yaml
+~                                       |    matchLabels:                        |  345  history | tail -20 > pop
+~                                       |      org: ds                           |~                                                                  
+~                                       |                                        |~                     
+
+
+apiVersion: v1                          |apiVersion: v1                          |  396  kubectl describe ns eric
+kind: ResourceQuota                     |kind: Pod                               |  397  vim quota.yaml
+metadata:                               |metadata:                               |  398  kubectl apply -f quota.yaml
+  name: quota1                          |  name: web4                            |  399  vim quota.yaml
+  namespace: eric                       |  namespace: eric                       |  400  kubectl apply -f quota.yaml
+spec:                                   |spec:                                   |  401  kubectl describe ns eric
+  hard:                                 |  containers:                           |  402  kubectl get pods -n eric
+    pods: 5                             |  - name: app                           |  403  vim pod.yaml
+    requests.memory: 2Gi                |    image: redis                        |  404  kubectl apply -f pod.yaml
+    requests.cpu: 2                     |    resources:                          |  405  kubectl get pods -n eric
+    limits.memory: 3Gi                  |      requests:                         |  406  kubectl describe ns eric
+    limits.cpu: 3                       |        memory: 300Mi                   |  407  vim pod.yaml
+~                                       |        cpu: 50m                        |  408  kubectl apply -f pod.yaml
+~                                       |      limits:                           |  409  vim pod.yaml
+~                                       |        memory: 400Mi                   |  410  kubectl apply -f pod.yaml
+~                                       |        cpu: 80m                        |  411  kubectl get pods -n eric
+~                                       |~                                       |  412  kubectl describe ns eric
+~                                       |~                                       |  413  vim pod.yaml
+~                                       |~                                       |  414  kubectl apply -f pod.yaml
+~                                       |~                                       |  415  history | tail -20 > pop
+~    
+kubectl exec -it hpapp -- bash
+root@hpapp:/# history 
+    1  cd /usr/share/nginx/html/
+    2  cat > index.html 
+    3  exit
+
+apiVersion: v1                          |apiVersion: v1                          |  450  kubectl get pods -o wide
+kind: Pod                               |kind: Service                           |  451  kubectl describe pod webserver
+metadata:                               |metadata:                               |  452  kubectl describe pod webserver |
+  name: hpapp                           |  name: myservice                       |less
+  labels:                               |spec:                                   |  453  kubectl get svc
+    app: testapp                        |  type: NodePort                        |  454  history
+spec:                                   |  selector:                             |  455  kubectl geeet svc
+  containers:                           |    app: testapp                        |  456  kubectl get svc
+  - name: app                           |  ports:                                |  457  kubectl get pods -o wide
+    image: nginx                        |  - targetPort: 80                      |  458  history
+    ports:                              |    port: 80                            |  459  kubectl get pods -o wide
+    - containerPort: 80                 |    nodePort: 30777                     |  460  history
+~                                       |~                                       |  461  vim pod.yaml
+~                                       |~                                       |  462  vim app.yaml
+~                                       |~                                       |  463  vim service.yaml
+~                                       |~                                       |  464  kubectl apply -f app.yaml
+~                                       |~                                       |  465  kubectl apply -f service.yaml
+~                                       |~                                       |  466  kubectl get svc
+~                                       |~                                       |  467  kubectl exec -it hpapp -- bash
+~                                       |~                                       |  468  kubectl get pods -o wide
+~                                       |~                                       |  469  history | tail -20 > pop
+
+
+apiVersion: v1                |apiVersion: v1                |apiVersion: v1                |  402  kubectl apply -f pv.yaml
+kind: PersistentVolume        |kind: PersistentVolumeClaim   |kind: Pod                     |  403  kubectl get pv
+metadata:                     |metadata:                     |metadata:                     |  404  vim pvc.yaml
+  name: pv1                   |  name: pvc-vol               |  name: volapp                |  405  kubectl apply -f pvc.yaml
+  labels:                     |spec:                         |spec:                         |  406  kubectl get pvc
+    type: local               |  storageClassName: manual    |  containers:                 |  407  vim pvc.yaml
+spec:                         |  selector:                   |  - name: app                 |  408  kubectl get pvc
+  storageClassName: manual    |    matchLabels:              |    image: nginx              |  409  kubectl delete -f pvc.yaml
+  capacity:                   |      type: local             |    volumeMounts:             |  410  vim pvc.yaml
+    storage: 2Gi              |  accessModes:                |    - mountPath: /linux       |  411  vim pv.yaml
+  accessModes:                |  - ReadWriteMany             |      name: vol1              |  412  kubectl apply -f pvc.yaml
+  - ReadWriteMany             |  resources:                  |                              |  413  kubectl get pvc
+  hostPath:                   |    requests:                 |  volumes:                    |  414  kubectl get pv
+    path: /red                |      storage: 2Gi            |  - name: vol1                |  415  vim volpod.yaammml
+~                             |~                             |    persistentVolumeClaim:    |  416  vim volpod.yaml
+~                             |~                             |      claimName: pvc-vol      |  417  kubectl apply -f volpod.yaml
+~                             |~                             |~                             |  418  kubectl get pods
+~                             |~                             |~                             |  419  kubectl exec -it volapp -- bash
+~                             |~                             |~                             |  420  kubectl get pods -o wide
+~                             |~                             |~                             |  421  history | tail -20 > pop
+~        
+
+ scp *.yaml root@172.20.0.179:/home/rps/Desktop
+
+apiVersion: v1                                                            |  409  kubectl delete -f pvc.yaml
+kind: Pod                                                                 |  410  vim pvc.yaml
+metadata:                                                                 |  411  vim pv.yaml
+  name: newapp                                                            |  412  kubectl apply -f pvc.yaml
+spec:                                                                     |  413  kubectl get pvc
+  containers:                                                             |  414  kubectl get pv
+  - name: vm1                                                             |  415  vim volpod.yaammml
+    image: redis                                                          |  416  vim volpod.yaml
+    volumeMounts:                                                         |  417  kubectl apply -f volpod.yaml
+    - mountPath: /suse                                                    |  418  kubectl get pods
+      name: vol                                                           |  419  kubectl exec -it volapp -- bash
+                                                                          |  420  kubectl get pods -o wide
+  - name: vm2                                                             |  421  history | tail -20 > pop
+    image: nginx                                                          |  422  vim -O pv.yaml pvc.yaml volpod.yaml pop
+    volumeMounts:                                                         |  423  vim empty.yaml
+    - mountPath: /suse                                                    |  424  kubectl apply -f empty.yaml
+      name: vol                                                           |  425  kubectl exec -it newapp -- bash
+                                                                          |  426  kubectl exec -it newapp -c vm2 -- bash
+  volumes:                                                                |  427  kubectl exec -it newapp -c vm1 -- bash
+  - name: vol                                                             |  428  history | tail -20 > pop
+    emptyDir: {}                                                          |~                                                                         
+                                                                          |~                                                                         
+~                                              
+
+
+|~                             |~                             |~                                                       
+~                             |~                             |~                        
+
+kubectl create role depmanager --verb=delete,create --resource=deployments,services
+kubectl create rolebinding depadmin --role=depmanager --user=ram
+kubectl delete role depmanager
+kubectl delete role depadmin
+kubectl delete rolebinding depadmin
+kubectl create role depmanager --verb=delete,create --resource=deployments,services -n dell
+kubectl create rolebinding depadmin --role=depmanager --user=ram -n dell
+kubectl auth can-i get deployments --as ram -n dell
+kubectl auth can-i delete deployments --as ram -n dell
+kubectl auth can-i delete services --as ram -n dell
+kubectl auth can-i get  services --as ram -n dell
+kubectl auth can-i get  services --as ram 
+history 
+kubectl create clusterrole svcrole --verb=get --resource=services
+kubectl create clusterrolebinding svcadmin --clusterrole=svcrole --user=pop
+kubectl auth can-i get services --as pop
+kubectl auth can-i get services --as pop -n eric
+kubectl auth can-i get services --as pop -n dell
+history 
+kubectl config set-context --current --namespace=eric
+kubectl get pods
+kubectl config set-context --current --namespace=default
+
+kubectl logs volpod
+kubectl get pods
+kubectl logs volapp
+kubectl logs multiapp
+kubectl logs multipod
+kubectl logs -c app1multipod
+kubectl logs -c app1cmultipod
+kubectl logs -c app1 multipod
+kubectl logs -c app2 multipod
+kubectl  get events
+kubectl get pods
+kubectl describe pod web1
+kubectl get pods -n kube-system
+kubectl logs etcd-node01 -n kube-system
+kubectl get pods -n kube-system
+journalctl -u docker
+journalctl -u kubelet
+systemctl status kubelet
+kubectl get pods -n kube-system
+history 
+kubectl get nodes
+kubectl get nodes -o wide
+kubectl describe node node01
+
+
+ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+ ./get_helm.sh
+
+helm list
+helm repo list
+helm repo add myrepo https://charts.bitnami.com/bitnami
+helm repo list
+helm install web-eric myrepo/
+kubectl get pods
+kubectl get deployment
+kubectl get svc
+history 
+helm install apache myrepo/apache
+kubectl get pods
+kubectl get svc
+kubectl get pods
+kubectl get pods -o wide
+kubectl get svc
+kubectl get pods -o wide
+kubectl get svc
+history 
+helm template vault myrepo/nginx --output-dir vault/manifests
+cd vault/manifests/nginx/templates/
+ls
+vim deployment.yaml 
+vim svc.yaml 
+kubectl get svc
+cd
+history 
+helm list
+helm uninstall web-eric
+
+
+
+
+
+
